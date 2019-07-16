@@ -66,3 +66,58 @@ if (runBSMslow == TRUE)
 } # END if (runBSMslow == TRUE)
 
 save(BSM_output, file = "BSM_output.RData")
+
+# Extract BSM output
+clado_events_tables = BSM_output$RES_clado_events_tables
+ana_events_tables = BSM_output$RES_ana_events_tables
+head(clado_events_tables[[1]])
+head(ana_events_tables[[1]])
+length(clado_events_tables)
+length(ana_events_tables)
+
+include_null_range = TRUE
+areanames = names(tipranges@df)
+areas = areanames
+max_range_size = 8
+
+
+
+#######################################################
+# Summarize stochastic map tables
+#######################################################
+length(clado_events_tables)
+length(ana_events_tables)
+
+head(clado_events_tables[[1]][,-20])
+tail(clado_events_tables[[1]][,-20])
+
+head(ana_events_tables[[1]])
+tail(ana_events_tables[[1]])
+
+areanames = names(tipranges@df)
+actual_names = areanames
+actual_names
+
+# Get the dmat and times (if any)
+dmat_times = get_dmat_times_from_res(res=res, numstates=NULL)
+dmat_times
+
+# Extract BSM output
+clado_events_tables = BSM_output$RES_clado_events_tables
+ana_events_tables = BSM_output$RES_ana_events_tables
+
+# Simulate the source areas
+BSMs_w_sourceAreas = simulate_source_areas_ana_clado(res, clado_events_tables, ana_events_tables, areanames)
+clado_events_tables = BSMs_w_sourceAreas$clado_events_tables
+ana_events_tables = BSMs_w_sourceAreas$ana_events_tables
+
+# Count all anagenetic and cladogenetic events
+counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables, areanames, actual_names)
+
+save(counts_list, file = "counts_list.RData")
+
+summary_counts_BSMs = counts_list$summary_counts_BSMs
+print(conditional_format_table(summary_counts_BSMs))
+
+
+

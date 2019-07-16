@@ -1378,7 +1378,7 @@ load("CyperaceaeMadagascar_DEC_M0_constrained_x.Rdata")
 res$inputs$wd <- "/home/amesclir/Documents/Ubuntufiles/GITHUB/CyperaceaeMadagascar"
 res$inputs$trfn <- "/home/amesclir/Documents/Ubuntufiles/GITHUB/CyperaceaeMadagascar/tree.tree"
 res$inputs$geogfn <- "/home/amesclir/Documents/Ubuntufiles/GITHUB/CyperaceaeMadagascar/CyperaceaeMadagascar_occurrence_world.txt"
-
+model_name <- "DECx"
 #######################################################
 
 clado_events_tables = NULL
@@ -1550,7 +1550,7 @@ ana_events_tables = BSMs_w_sourceAreas$ana_events_tables
 
 # Count all anagenetic and cladogenetic events
 counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables, areanames, actual_names)
-
+load("counts_list.RData")
 summary_counts_BSMs = counts_list$summary_counts_BSMs
 print(conditional_format_table(summary_counts_BSMs))
 

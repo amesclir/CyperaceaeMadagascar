@@ -297,17 +297,17 @@ plot(x = A$V1, y = A$weighted_freq, main = "Dispersal Destinations", type="l", x
 par(new=T)
 lines(jitter(B$V1, amount = 0.3), B$weighted_freq, col = alpha('orange', 0.4), lwd=3)
 par(new=T)
-lines(jitter(C$V1,amount = 0.3), C$weighted_freq, col = alpha("pink", 0.4), lwd=3)
+lines(jitter(C$V1,amount = 0.3), C$weighted_freq, col = alpha("purple", 0.4), lwd=3)
 par(new=T)
 lines(jitter(D$V1,amount = 0.3), D$weighted_freq, col = alpha("dark blue", 0.4), lwd=3)
 par(new=T)
-lines(jitter(E$V1,amount = 0.3), E$weighted_freq, col = alpha("grey", 0.4), lwd = 3)
+lines(jitter(E$V1,amount = 0.3), E$weighted_freq, col = alpha("black", 0.4), lwd = 3)
 par(new=T)
 lines(jitter(F$V1,amount = 0.3), F$weighted_freq, col = alpha("green", 0.4), lwd = 3)
 par(new=T)
-lines(jitter(G$V1,amount = 0.3), G$weighted_freq, col = alpha("cyan", 0.4), lwd = 3)
+lines(jitter(G$V1,amount = 0.3), G$weighted_freq, col = alpha("yellow", 0.4), lwd = 3)
 par(new=T)
-lines(jitter(H$V1,amount = 0.3), H$weighted_freq, col = alpha("black", 0.4), lwd = 3)
+lines(jitter(H$V1,amount = 0.3), H$weighted_freq, col = alpha("cyan", 0.4), lwd = 3)
 #text(48,1, "Sympatry", col = "red", adj = c(0, -.1))
 #text(48,0.975, "Subset Sympatry", col = "blue", adj = c(0, -.1))
 #text(48,0.95, "Vicariance", col = "dark green", adj = c(0, -.1))
@@ -319,7 +319,7 @@ mtext(side = 4, line = 3, "Total number of dispersal events")
 legend("top", legend = c("Madagascar region","S Africa","Tropical Africa","N Africa/Eurasia","India", "SE Asia / Australasia", "N America","Neotropics", "Total # Events"), 
        lty = c(1,1,1,1,1,1,1,1,0),
        lwd = c(2,2,2,2,2,2,2,2,0),
-       col = c("red","orange","pink","dark blue","grey", "green","yellow","cyan","black"),
+       col = c("red","orange","purple","dark blue","black", "green","yellow","cyan","black"),
        pch = c(NA, NA, NA, NA, NA, NA, NA, NA, 16))
 dev.off()
   

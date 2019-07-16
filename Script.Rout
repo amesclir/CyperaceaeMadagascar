@@ -28667,6 +28667,550 @@ BSM_output$RES_ana_events_tables
 > 
 > save(BSM_output, file = "BSM_output.RData")
 > 
+> # Extract BSM output
+> clado_events_tables = BSM_output$RES_clado_events_tables
+> ana_events_tables = BSM_output$RES_ana_events_tables
+> head(clado_events_tables[[1]])
+  node ord_ndname node_lvl node.type parent_br edge.length ancestor
+1    1          1       39       tip         1    0.761133     1421
+2    2          2       39       tip         2    0.761133     1421
+3    3          3       38       tip       836    1.159607     1420
+4    4          4       38       tip         3    0.204874     1422
+5    5          5       38       tip         4    0.204874     1422
+6    6          6       36       tip      1638    2.177705     1418
+  daughter_nds  node_ht      time_bp fossils              label
+1              99.56981 4.263256e-14   FALSE     Carex_paleacea
+2              99.56981 4.263256e-14   FALSE       Carex_salina
+3              99.56981 4.263256e-14   FALSE Carex_subspathacea
+4              99.56981 2.842171e-14   FALSE     Carex_lyngbyei
+5              99.56981 2.842171e-14   FALSE    Carex_ramenskii
+6              99.56981 2.842171e-14   FALSE    Carex_aquatilis
+  sampled_states_AT_nodes sampled_states_AT_brbots left_desc_nodes
+1                      30                       30              NA
+2                      30                        5              NA
+3                       5                        5              NA
+4                      30                       30              NA
+5                       5                        5              NA
+6                      30                        8              NA
+  right_desc_nodes samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type
+1               NA                NA                 NA                 
+2               NA                NA                 NA                 
+3               NA                NA                 NA                 
+4               NA                NA                 NA                 
+5               NA                NA                 NA                 
+6               NA                NA                 NA                 
+  clado_event_txt clado_dispersal_to
+1                                   
+2                                   
+3                                   
+4                                   
+5                                   
+6                                   
+                                                                                                                                                                                                                                                                                    anagenetic_events_txt_below_node
+1                                                                                                                                                                                                                                                                                                               none
+2 nodenum_at_top_of_branch:2,trynum:205,brlen:0.761133,current_rangenum_1based:5,new_rangenum_1based:30,current_rangetxt:D,new_rangetxt:DG,abs_event_time:0.569512039960927,event_time:0.191620960039116,event_type:d,event_txt:D->DG,new_area_num_1based:7,lost_area_num_1based:-,dispersal_to:G,extirpation_from:-
+3                                                                                                                                                                                                                                                                                                               none
+4                                                                                                                                                                                                                                                                                                               none
+5                                                                                                                                                                                                                                                                                                               none
+6   nodenum_at_top_of_branch:6,trynum:65,brlen:2.177705,current_rangenum_1based:8,new_rangenum_1based:30,current_rangetxt:G,new_rangetxt:DG,abs_event_time:1.83190134805392,event_time:0.345803651946106,event_type:d,event_txt:G->DG,new_area_num_1based:4,lost_area_num_1based:-,dispersal_to:D,extirpation_from:-
+> head(ana_events_tables[[1]])
+   node ord_ndname node_lvl node.type parent_br edge.length ancestor
+2     2          2       39       tip         2    0.761133     1421
+6     6          6       36       tip      1638    2.177705     1418
+12   12         12       37       tip         7    1.518110     1428
+17   17         17       41       tip       842    0.429318     1436
+19   19         19       39       tip      1642    0.593724     1434
+27   27         27       32       tip      2422    6.993852     1414
+   daughter_nds  node_ht      time_bp fossils             label
+2               99.56981 4.263256e-14   FALSE      Carex_salina
+6               99.56981 2.842171e-14   FALSE   Carex_aquatilis
+12              99.56981 1.421085e-14   FALSE   Carex_bigelowii
+17              99.56981 1.421085e-14   FALSE Carex_orbicularis
+19              99.56981 2.842171e-14   FALSE       Carex_nigra
+27              99.56981 2.842171e-14   FALSE   Carex_podocarpa
+   sampled_states_AT_nodes sampled_states_AT_brbots left_desc_nodes
+2                       30                        5              NA
+6                       30                        8              NA
+12                      30                        8              NA
+17                      28                        5              NA
+19                      30                        5              NA
+27                      30                        8              NA
+   right_desc_nodes samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type
+2                NA                NA                 NA                 
+6                NA                NA                 NA                 
+12               NA                NA                 NA                 
+17               NA                NA                 NA                 
+19               NA                NA                 NA                 
+27               NA                NA                 NA                 
+   clado_event_txt clado_dispersal_to nodenum_at_top_of_branch trynum    brlen
+2                                                            2    205 0.761133
+6                                                            6     65 2.177705
+12                                                          12     54 1.518110
+17                                                          17     31 0.429318
+19                                                          19     66 0.593724
+27                                                          27     13 6.993852
+   current_rangenum_1based new_rangenum_1based current_rangetxt new_rangetxt
+2                        5                  30                D           DG
+6                        8                  30                G           DG
+12                       8                  30                G           DG
+17                       5                  28                D           DE
+19                       5                  30                D           DG
+27                       8                  30                G           DG
+   abs_event_time event_time event_type event_txt new_area_num_1based
+2       0.5695120 0.19162096          d     D->DG                   7
+6       1.8319013 0.34580365          d     G->DG                   4
+12      0.6132539 0.90485606          d     G->DG                   4
+17      0.3955399 0.03377807          d     D->DE                   5
+19      0.2079276 0.38579638          d     D->DG                   7
+27      1.5624119 5.43144012          d     G->DG                   4
+   lost_area_num_1based dispersal_to extirpation_from
+2                     -            G                -
+6                     -            D                -
+12                    -            D                -
+17                    -            E                -
+19                    -            G                -
+27                    -            D                -
+> length(clado_events_tables)
+[1] 50
+> length(ana_events_tables)
+[1] 50
+> 
+> include_null_range = TRUE
+> areanames = names(tipranges@df)
+> areas = areanames
+> max_range_size = 8
+> 
+> 
+> 
+> #######################################################
+> # Summarize stochastic map tables
+> #######################################################
+> length(clado_events_tables)
+[1] 50
+> length(ana_events_tables)
+[1] 50
+> 
+> head(clado_events_tables[[1]][,-20])
+  node ord_ndname node_lvl node.type parent_br edge.length ancestor
+1    1          1       39       tip         1    0.761133     1421
+2    2          2       39       tip         2    0.761133     1421
+3    3          3       38       tip       836    1.159607     1420
+4    4          4       38       tip         3    0.204874     1422
+5    5          5       38       tip         4    0.204874     1422
+6    6          6       36       tip      1638    2.177705     1418
+  daughter_nds  node_ht      time_bp fossils              label
+1              99.56981 4.263256e-14   FALSE     Carex_paleacea
+2              99.56981 4.263256e-14   FALSE       Carex_salina
+3              99.56981 4.263256e-14   FALSE Carex_subspathacea
+4              99.56981 2.842171e-14   FALSE     Carex_lyngbyei
+5              99.56981 2.842171e-14   FALSE    Carex_ramenskii
+6              99.56981 2.842171e-14   FALSE    Carex_aquatilis
+  sampled_states_AT_nodes sampled_states_AT_brbots left_desc_nodes
+1                      30                       30              NA
+2                      30                        5              NA
+3                       5                        5              NA
+4                      30                       30              NA
+5                       5                        5              NA
+6                      30                        8              NA
+  right_desc_nodes samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type
+1               NA                NA                 NA                 
+2               NA                NA                 NA                 
+3               NA                NA                 NA                 
+4               NA                NA                 NA                 
+5               NA                NA                 NA                 
+6               NA                NA                 NA                 
+  clado_dispersal_to
+1                   
+2                   
+3                   
+4                   
+5                   
+6                   
+                                                                                                                                                                                                                                                                                    anagenetic_events_txt_below_node
+1                                                                                                                                                                                                                                                                                                               none
+2 nodenum_at_top_of_branch:2,trynum:205,brlen:0.761133,current_rangenum_1based:5,new_rangenum_1based:30,current_rangetxt:D,new_rangetxt:DG,abs_event_time:0.569512039960927,event_time:0.191620960039116,event_type:d,event_txt:D->DG,new_area_num_1based:7,lost_area_num_1based:-,dispersal_to:G,extirpation_from:-
+3                                                                                                                                                                                                                                                                                                               none
+4                                                                                                                                                                                                                                                                                                               none
+5                                                                                                                                                                                                                                                                                                               none
+6   nodenum_at_top_of_branch:6,trynum:65,brlen:2.177705,current_rangenum_1based:8,new_rangenum_1based:30,current_rangetxt:G,new_rangetxt:DG,abs_event_time:1.83190134805392,event_time:0.345803651946106,event_type:d,event_txt:G->DG,new_area_num_1based:4,lost_area_num_1based:-,dispersal_to:D,extirpation_from:-
+> tail(clado_events_tables[[1]][,-20])
+     node ord_ndname node_lvl node.type parent_br edge.length ancestor
+2758 2758       2758        7  internal      1312   17.740612     2756
+2759 2759       2759        4  internal      2150   19.243606     2749
+2760 2760       2760        5  internal      1313   34.061536     2759
+2761 2761       2761        1  internal      2762   20.236592     1383
+2762 2762       2762        2  internal      1635   12.082350     2761
+2763 2763       2763        3  internal      1315    6.601942     2762
+     daughter_nds  node_ht   time_bp fossils label sampled_states_AT_nodes
+2758   1372, 1373 96.21649  3.353315      NA   100                      32
+2759   2760, 1377 59.60253 39.967279      NA    90                       9
+2760   1375, 1376 93.66407  5.905743      NA   100                       9
+2761   2762, 1382 20.23659 79.333217      NA    69                     256
+2762   2763, 1381 32.31894 67.250867      NA    41                     256
+2763   1379, 1380 38.92088 60.648925      NA    40                       4
+     sampled_states_AT_brbots left_desc_nodes right_desc_nodes
+2758                        7            1372             1373
+2759                        9            2760             1377
+2760                        9            1375             1376
+2761                      250            2762             1382
+2762                      256            2763             1381
+2763                        4            1379             1380
+     samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type clado_dispersal_to
+2758                32                  7       subset (s)                   
+2759                 9                  9     sympatry (y)                   
+2760                 9                  9     sympatry (y)                   
+2761               256                  8       subset (s)                   
+2762                 4                253   vicariance (v)                   
+2763                 4                  4     sympatry (y)                   
+                                                                                                                                                                                                                                                                                                                 anagenetic_events_txt_below_node
+2758                          nodenum_at_top_of_branch:2758,trynum:40,brlen:17.740612,current_rangenum_1based:7,new_rangenum_1based:32,current_rangetxt:F,new_rangetxt:EF,abs_event_time:11.8143604272332,event_time:9.27956657276688,event_type:d,event_txt:F->EF,new_area_num_1based:5,lost_area_num_1based:-,dispersal_to:E,extirpation_from:-
+2759                                                                                                                                                                                                                                                                                                                                         none
+2760                                                                                                                                                                                                                                                                                                                                         none
+2761 nodenum_at_top_of_branch:2761,trynum:3,brlen:20.236592,current_rangenum_1based:250,new_rangenum_1based:256,current_rangetxt:ABCDEGH,new_rangetxt:ABCDEFGH,abs_event_time:82.4894278616641,event_time:17.080381138336,event_type:d,event_txt:ABCDEGH->ABCDEFGH,new_area_num_1based:6,lost_area_num_1based:-,dispersal_to:F,extirpation_from:-
+2762                                                                                                                                                                                                                                                                                                                                         none
+2763                                                                                                                                                                                                                                                                                                                                         none
+> 
+> head(ana_events_tables[[1]])
+   node ord_ndname node_lvl node.type parent_br edge.length ancestor
+2     2          2       39       tip         2    0.761133     1421
+6     6          6       36       tip      1638    2.177705     1418
+12   12         12       37       tip         7    1.518110     1428
+17   17         17       41       tip       842    0.429318     1436
+19   19         19       39       tip      1642    0.593724     1434
+27   27         27       32       tip      2422    6.993852     1414
+   daughter_nds  node_ht      time_bp fossils             label
+2               99.56981 4.263256e-14   FALSE      Carex_salina
+6               99.56981 2.842171e-14   FALSE   Carex_aquatilis
+12              99.56981 1.421085e-14   FALSE   Carex_bigelowii
+17              99.56981 1.421085e-14   FALSE Carex_orbicularis
+19              99.56981 2.842171e-14   FALSE       Carex_nigra
+27              99.56981 2.842171e-14   FALSE   Carex_podocarpa
+   sampled_states_AT_nodes sampled_states_AT_brbots left_desc_nodes
+2                       30                        5              NA
+6                       30                        8              NA
+12                      30                        8              NA
+17                      28                        5              NA
+19                      30                        5              NA
+27                      30                        8              NA
+   right_desc_nodes samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type
+2                NA                NA                 NA                 
+6                NA                NA                 NA                 
+12               NA                NA                 NA                 
+17               NA                NA                 NA                 
+19               NA                NA                 NA                 
+27               NA                NA                 NA                 
+   clado_event_txt clado_dispersal_to nodenum_at_top_of_branch trynum    brlen
+2                                                            2    205 0.761133
+6                                                            6     65 2.177705
+12                                                          12     54 1.518110
+17                                                          17     31 0.429318
+19                                                          19     66 0.593724
+27                                                          27     13 6.993852
+   current_rangenum_1based new_rangenum_1based current_rangetxt new_rangetxt
+2                        5                  30                D           DG
+6                        8                  30                G           DG
+12                       8                  30                G           DG
+17                       5                  28                D           DE
+19                       5                  30                D           DG
+27                       8                  30                G           DG
+   abs_event_time event_time event_type event_txt new_area_num_1based
+2       0.5695120 0.19162096          d     D->DG                   7
+6       1.8319013 0.34580365          d     G->DG                   4
+12      0.6132539 0.90485606          d     G->DG                   4
+17      0.3955399 0.03377807          d     D->DE                   5
+19      0.2079276 0.38579638          d     D->DG                   7
+27      1.5624119 5.43144012          d     G->DG                   4
+   lost_area_num_1based dispersal_to extirpation_from
+2                     -            G                -
+6                     -            D                -
+12                    -            D                -
+17                    -            E                -
+19                    -            G                -
+27                    -            D                -
+> tail(ana_events_tables[[1]])
+      node ord_ndname node_lvl node.type parent_br edge.length ancestor
+27461 2746       2746        4  internal      1307   33.987835     2745
+2747  2747       2747        4  internal      1308   10.314205     2745
+2750  2750       2750        4  internal      2149    2.325421     2749
+2753  2753       2753        7  internal      1631   11.965365     2752
+2758  2758       2758        7  internal      1312   17.740612     2756
+2761  2761       2761        1  internal      2762   20.236592     1383
+      daughter_nds  node_ht   time_bp fossils label sampled_states_AT_nodes
+27461   1361, 1362 97.09850  2.471305      NA   100                      38
+2747    1363, 1364 73.42487 26.144935      NA    80                      48
+2750    2751, 2755 42.68435 56.885464      NA    43                      36
+2753    2754, 1367 72.07051 27.499296      NA    99                      20
+2758    1372, 1373 96.21649  3.353315      NA   100                      32
+2761    2762, 1382 20.23659 79.333217      NA    69                     256
+      sampled_states_AT_brbots left_desc_nodes right_desc_nodes
+27461                        2            1361             1362
+2747                        16            1363             1364
+2750                         9            2751             2755
+2753                         7            2754             1367
+2758                         7            1372             1373
+2761                       250            2762             1382
+      samp_LEFT_dcorner samp_RIGHT_dcorner clado_event_type
+27461                 4                 10   vicariance (v)
+2747                  9                 48       subset (s)
+2750                 36                  7       subset (s)
+2753                  3                 20       subset (s)
+2758                 32                  7       subset (s)
+2761                256                  8       subset (s)
+           clado_event_txt clado_dispersal_to nodenum_at_top_of_branch trynum
+27461            ABC->C,AB                                        2746    202
+2747            ACH->H,ACH                                        2747      4
+2750              FH->FH,F                                        2750    121
+2753              BF->B,BF                                        2753     63
+2758              EF->EF,F                                        2758     40
+2761  ABCDEFGH->ABCDEFGH,G                                        2761      3
+          brlen current_rangenum_1based new_rangenum_1based current_rangetxt
+27461 33.987835                      11                  38               AC
+2747  10.314205                      16                  48               AH
+2750   2.325421                       9                  36                H
+2753  11.965365                       7                  20                F
+2758  17.740612                       7                  32                F
+2761  20.236592                     250                 256          ABCDEGH
+      new_rangetxt abs_event_time event_time event_type         event_txt
+27461          ABC       3.414964 33.0441759          d           AC->ABC
+2747           ACH      30.798235  5.6609051          d           AH->ACH
+2750            FH      58.525573  0.6853123          d             H->FH
+2753            BF      36.847920  2.6167408          d             F->BF
+2758            EF      11.814360  9.2795666          d             F->EF
+2761      ABCDEFGH      82.489428 17.0803811          d ABCDEGH->ABCDEFGH
+      new_area_num_1based lost_area_num_1based dispersal_to extirpation_from
+27461                   2                    -            B                -
+2747                    3                    -            C                -
+2750                    6                    -            F                -
+2753                    2                    -            B                -
+2758                    5                    -            E                -
+2761                    6                    -            F                -
+> 
+> areanames = names(tipranges@df)
+> actual_names = areanames
+> actual_names
+[1] "A" "B" "C" "D" "E" "F" "G" "H"
+> 
+> # Get the dmat and times (if any)
+> dmat_times = get_dmat_times_from_res(res=res, numstates=NULL)
+Read 10 items
+Read 2764 items
+[1] "A\tB\tC\tD\tE\tF\tG\tH"
+[1] "0\t1.00\t1.35\t3.22\t2.20\t3.43\t6.26\t4.46"
+[1] "1.00\t0\t1.26\t3.93\t3.10\t4.37\t5.77\t3.46"
+[1] "1.35\t1.26\t0\t2.86\t2.41\t4.41\t4.92\t3.78"
+[1] "3.22\t3.93\t2.86\t0\t1.23\t2.81\t3.78\t5.74"
+[1] "2.20\t3.10\t2.41\t1.23\t0\t2.25\t5.00\t6.14"
+[1] "3.43\t4.37\t4.41\t2.81\t2.25\t0\t5.24\t7.10"
+[1] "6.26\t5.77\t4.92\t3.78\t5.00\t5.24\t0\t2.96"
+[1] "4.46\t3.46\t3.78\t5.74\t6.14\t7.10\t2.96\t0"
+[1] ""
+[1] "END"
+> dmat_times
+$dmat
+          A         B         C         D         E         F         G
+1        NA 1.0000000 0.9191698 0.7200599 0.8013653 0.7073960 0.5974231
+2 1.0000000        NA 0.9371539 0.6808709 0.7277815 0.6608771 0.6112567
+3 0.9191698 0.9371539        NA 0.7444397 0.7811069 0.6591881 0.6392364
+4 0.7200599 0.6808709 0.7444397        NA 0.9435179 0.7481364 0.6883532
+5 0.8013653 0.7277815 0.7811069 0.9435179        NA 0.7963234 0.6363473
+6 0.7073960 0.6608771 0.6591881 0.7481364 0.7963234        NA 0.6280232
+7 0.5974231 0.6112567 0.6392364 0.6883532 0.6363473 0.6280232        NA
+8 0.6571042 0.7056680 0.6883532 0.6121523 0.6006795 0.5766655 0.7372888
+          H
+1 0.6571042
+2 0.7056680
+3 0.6883532
+4 0.6121523
+5 0.6006795
+6 0.5766655
+7 0.7372888
+8        NA
+
+> 
+> # Extract BSM output
+> clado_events_tables = BSM_output$RES_clado_events_tables
+> ana_events_tables = BSM_output$RES_ana_events_tables
+> 
+> # Simulate the source areas
+> BSMs_w_sourceAreas = simulate_source_areas_ana_clado(res, clado_events_tables, ana_events_tables, areanames)
+Read 10 items
+Read 2764 items
+[1] "A\tB\tC\tD\tE\tF\tG\tH"
+[1] "0\t1.00\t1.35\t3.22\t2.20\t3.43\t6.26\t4.46"
+[1] "1.00\t0\t1.26\t3.93\t3.10\t4.37\t5.77\t3.46"
+[1] "1.35\t1.26\t0\t2.86\t2.41\t4.41\t4.92\t3.78"
+[1] "3.22\t3.93\t2.86\t0\t1.23\t2.81\t3.78\t5.74"
+[1] "2.20\t3.10\t2.41\t1.23\t0\t2.25\t5.00\t6.14"
+[1] "3.43\t4.37\t4.41\t2.81\t2.25\t0\t5.24\t7.10"
+[1] "6.26\t5.77\t4.92\t3.78\t5.00\t5.24\t0\t2.96"
+[1] "4.46\t3.46\t3.78\t5.74\t6.14\t7.10\t2.96\t0"
+[1] ""
+[1] "END"
+
+
+Simulating the ancestral areas for cases where the ancestral area occupied 2 or more areas (number of stochastic maps=50):
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 
+
+> clado_events_tables = BSMs_w_sourceAreas$clado_events_tables
+> ana_events_tables = BSMs_w_sourceAreas$ana_events_tables
+> 
+> # Count all anagenetic and cladogenetic events
+> counts_list = count_ana_clado_events(clado_events_tables, ana_events_tables, areanames, actual_names)
+
+count_ana_clado_events() is counting events over Biogeographical Stochastic Map (BSM) #:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 
+
+Range-switching dispersal (all observed 'a' dispersals):
+
+means:
+  A B C D E F G H
+A 0 0 0 0 0 0 0 0
+B 0 0 0 0 0 0 0 0
+C 0 0 0 0 0 0 0 0
+D 0 0 0 0 0 0 0 0
+E 0 0 0 0 0 0 0 0
+F 0 0 0 0 0 0 0 0
+G 0 0 0 0 0 0 0 0
+H 0 0 0 0 0 0 0 0
+
+standard deviations:
+  A B C D E F G H
+A 0 0 0 0 0 0 0 0
+B 0 0 0 0 0 0 0 0
+C 0 0 0 0 0 0 0 0
+D 0 0 0 0 0 0 0 0
+E 0 0 0 0 0 0 0 0
+F 0 0 0 0 0 0 0 0
+G 0 0 0 0 0 0 0 0
+H 0 0 0 0 0 0 0 0
+
+
+Range-expansion dispersal (all observed 'd' dispersals):
+
+means:
+      A     B     C     D     E     F     G     H
+A     0 22.62 18.68 12.02 13.62  14.1  6.12   9.9
+B 23.98     0  25.4 11.56 10.78 14.12   5.3 10.14
+C  58.9  65.8     0 33.84 31.26 25.86  18.8  28.2
+D  15.7 17.58 18.08     0 47.58  50.8 73.48 12.98
+E 13.66  9.92 10.06 25.38     0 25.86  5.78  5.28
+F 16.82 13.62  9.94  34.6 31.84     0  10.7 12.14
+G   8.5   7.7  10.1 77.86 10.52 17.12     0 80.72
+H 13.58  8.78 12.28 10.04   7.7 11.12 47.48     0
+
+standard deviations:
+     A    B    C    D    E    F    G    H
+A    0 4.05 3.97 2.97 3.75  3.3 2.13 2.72
+B 4.16    0 4.38 3.09 3.23 2.52 1.69 2.95
+C 4.57 5.42    0 4.93 5.05    4 3.62 3.35
+D 3.39 2.91 3.16    0 5.53 7.26 6.51 2.83
+E 3.46 2.99 2.79 4.38    0 5.31 1.71 2.21
+F 3.09 3.57 3.06 4.71 4.96    0 2.51  2.7
+G  2.2 2.82 2.75 7.33 2.31 3.54    0 6.11
+H 2.84 3.13 2.76 2.77 2.61 2.72 5.75    0
+
+
+Anagenetic dispersal (mean of all observed anagenetic 'a' or 'd' dispersals):
+
+means:
+      A     B     C     D     E     F     G     H
+A     0 22.62 18.68 12.02 13.62  14.1  6.12   9.9
+B 23.98     0  25.4 11.56 10.78 14.12   5.3 10.14
+C  58.9  65.8     0 33.84 31.26 25.86  18.8  28.2
+D  15.7 17.58 18.08     0 47.58  50.8 73.48 12.98
+E 13.66  9.92 10.06 25.38     0 25.86  5.78  5.28
+F 16.82 13.62  9.94  34.6 31.84     0  10.7 12.14
+G   8.5   7.7  10.1 77.86 10.52 17.12     0 80.72
+H 13.58  8.78 12.28 10.04   7.7 11.12 47.48     0
+
+standard deviations:
+     A    B    C    D    E    F    G    H
+A    0 4.05 3.97 2.97 3.75  3.3 2.13 2.72
+B 4.16    0 4.38 3.09 3.23 2.52 1.69 2.95
+C 4.57 5.42    0 4.93 5.05    4 3.62 3.35
+D 3.39 2.91 3.16    0 5.53 7.26 6.51 2.83
+E 3.46 2.99 2.79 4.38    0 5.31 1.71 2.21
+F 3.09 3.57 3.06 4.71 4.96    0 2.51  2.7
+G  2.2 2.82 2.75 7.33 2.31 3.54    0 6.11
+H 2.84 3.13 2.76 2.77 2.61 2.72 5.75    0
+
+
+Cladogenetic dispersal (mean of all observed jump 'j' dispersals):
+
+means:
+  A B C D E F G H
+A 0 0 0 0 0 0 0 0
+B 0 0 0 0 0 0 0 0
+C 0 0 0 0 0 0 0 0
+D 0 0 0 0 0 0 0 0
+E 0 0 0 0 0 0 0 0
+F 0 0 0 0 0 0 0 0
+G 0 0 0 0 0 0 0 0
+H 0 0 0 0 0 0 0 0
+
+standard deviations:
+  A B C D E F G H
+A 0 0 0 0 0 0 0 0
+B 0 0 0 0 0 0 0 0
+C 0 0 0 0 0 0 0 0
+D 0 0 0 0 0 0 0 0
+E 0 0 0 0 0 0 0 0
+F 0 0 0 0 0 0 0 0
+G 0 0 0 0 0 0 0 0
+H 0 0 0 0 0 0 0 0
+
+
+ALL dispersal (mean of all observed anagenetic 'a', 'd' dispersals, PLUS cladogenetic founder/jump dispersal):
+
+means:
+      A     B     C     D     E     F     G     H
+A     0 22.62 18.68 12.02 13.62  14.1  6.12   9.9
+B 23.98     0  25.4 11.56 10.78 14.12   5.3 10.14
+C  58.9  65.8     0 33.84 31.26 25.86  18.8  28.2
+D  15.7 17.58 18.08     0 47.58  50.8 73.48 12.98
+E 13.66  9.92 10.06 25.38     0 25.86  5.78  5.28
+F 16.82 13.62  9.94  34.6 31.84     0  10.7 12.14
+G   8.5   7.7  10.1 77.86 10.52 17.12     0 80.72
+H 13.58  8.78 12.28 10.04   7.7 11.12 47.48     0
+
+standard deviations:
+     A    B    C    D    E    F    G    H
+A    0 4.05 3.97 2.97 3.75  3.3 2.13 2.72
+B 4.16    0 4.38 3.09 3.23 2.52 1.69 2.95
+C 4.57 5.42    0 4.93 5.05    4 3.62 3.35
+D 3.39 2.91 3.16    0 5.53 7.26 6.51 2.83
+E 3.46 2.99 2.79 4.38    0 5.31 1.71 2.21
+F 3.09 3.57 3.06 4.71 4.96    0 2.51  2.7
+G  2.2 2.82 2.75 7.33 2.31 3.54    0 6.11
+H 2.84 3.13 2.76 2.77 2.61 2.72 5.75    0
+
+
+Summary of event counts from 50 BSMs:
+       founder a     d e subset vicariance sympatry ALL_disp ana_disp all_ana
+means        0 0  1246 0  279.8      185.9    915.3     1246     1246    1246
+stdevs       0 0  8.49 0  15.42       6.83    14.19     8.49     8.49    8.49
+sums         0 0 62315 0  13992       9295    45763    62315    62315   62315
+       all_clado total_events
+means       1381         2627
+stdevs         0         8.49
+sums       69050       131365
+> 
+> save(counts_list, file = "counts_list.RData")
+> 
+> summary_counts_BSMs = counts_list$summary_counts_BSMs
+> print(conditional_format_table(summary_counts_BSMs))
+       founder a     d e subset vicariance sympatry ALL_disp ana_disp all_ana
+means        0 0  1246 0  279.8      185.9    915.3     1246     1246    1246
+stdevs       0 0  8.49 0  15.42       6.83    14.19     8.49     8.49    8.49
+sums         0 0 62315 0  13992       9295    45763    62315    62315   62315
+       all_clado total_events
+means       1381         2627
+stdevs         0         8.49
+sums       69050       131365
+> 
+> 
+> 
+> 
 > proc.time()
     user   system  elapsed 
-6335.990   28.859 6396.940 
+6289.278   29.232 6359.257 
