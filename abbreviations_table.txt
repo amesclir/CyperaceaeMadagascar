@@ -1,9 +1,0 @@
-num	ab1	ab2	desc	notes
-1	A	Mad	Madagascar
-2	B	SAf	S Africa
-3	C	TAf	T Africa
-4	D	NAE	N Africa / Eurasia
-5	E	Ind	India
-6	F	SEA	SE Asia / Australasia
-7	G	Nam	N America
-8	H	NTr	Neotropics
