@@ -1822,3 +1822,93 @@ check_ML_vs_BSM(res, clado_events_tables, model_name, tr=NULL, plot_each_node=FA
 
 ```
 
+
+
+
+
+```{r}
+library(diversitree)
+
+phy <- read.tree("./run1/tree.tree")
+mydata2 <- read.csv ("./run1/mydata.csv")
+states <- as.character(mydata2$Species)
+names(states) <- mydata2$Area
+setdiff(phy$tip.label, states)
+setdiff(states,phy$tip.label)
+setdiff(phy$tip.label, states)
+setdiff(states,phy$tip.label)
+phy$tip.state <- names(states)[match(phy$tip.label,states)]
+names(phy$tip.state) <- states[match(phy$tip.label,states)] 
+
+p <- starting.point.geosse(phy)
+p
+
+phy$tip.state[phy$tip.state == "A"] <- 1
+phy$tip.state[phy$tip.state == "B"] <- 2
+phy$tip.state[phy$tip.state == "AB"] <- 0
+phy$tip.state <- as.numeric(phy$tip.state)
+names(phy$tip.state) <- states[match(phy$tip.label,states)] 
+
+lik1 <- make.geosse(phy, phy$tip.state, sampling.f = c(0.5,0.5,0.25))
+lik2 <- constrain(lik1, sAB ~ 0)
+lik3 <- constrain(lik1, sA ~ sB, xA ~ xB)
+
+ml1 <- find.mle(lik1, p)
+p <- coef(ml1)
+ml2 <- find.mle(lik2, p[argnames(lik2)])
+ml3 <- find.mle(lik3, p[argnames(lik3)])
+
+round(rbind(full = coef(ml1),no.sAB = coef(ml2, TRUE),eq.div = coef(ml3, TRUE)), 3)
+
+anova(ml1, no.sAB = ml2, eq.div = ml3)
+
+
+
+p <- coef(ml2)
+prior <- make.prior.exponential(1/2)
+
+set.seed(1)
+tmp <- mcmc(lik2, p, nsteps=1000, prior=prior, w=1, print.every=0)
+w <- diff(sapply(tmp[2:7], quantile, c(0.025, 0.975)))
+
+mcmc2 <- mcmc(lik2, p, nsteps=50000, prior=prior, w=w)
+
+load(file = "./run1/samples2.RData")
+
+mcmc2diff <- with(mcmc2, data.frame(s.diff=sA-sB,x.diff=xA-xB,d.diff=dA-dB,div.A=sA-xA,div.B=sB-xB))
+colMeans(mcmc2diff > 0)
+col1 <- c("red", "orange", "blue", "purple", "black", "gray")
+col2 <- col1[c(1,3,5)]
+mcmc2diff <- with(mcmc2, data.frame(s.diff=sA-sB, x.diff=xA-xB, d.diff=dA-dB))
+par(mfrow=c(2,1), mar=c(3, 4, 0, 1))
+profiles.plot(mcmc2[2:7], col.line=col1, n.br=1000, xlab="", ylab="")
+legend("topright", argnames(lik2), col=col1, lty=1, cex = 0.5)
+profiles.plot(mcmc2diff, col.line=col2, n.br=1000, xlab="", ylab="")
+legend("topright", colnames(mcmc2diff), col=col2, lty=1, cex = 0.5)
+title(xlab="rate", ylab="posterior probability density", outer=T, line=-1)
+
+
+par(mfrow=c(1,1), mar=c(3, 4, 0, 1))
+col <- c("red", "orange", "blue", "purple", "black", "gray")
+profiles.plot(mcmc2[c("sA", "sB", "xA", "xB", "dA", "dB")], col.line=col, las=1, n.br=1000, xlab="Speciation, extinction and dispersal rate", legend="topright")
+
+col <- c("red", "orange")
+profiles.plot(mcmc2[c("sA", "sB")], col.line=col, las=1, n.br=1000, xlab="Speciation rate", legend="topright")
+
+col <- c("blue", "purple")
+profiles.plot(mcmc2[c("xA", "xB")], col.line=col, las=1, n.br=1000,xlab="Extinction rate", legend="topright")
+
+col <- c("black", "gray")
+profiles.plot(mcmc2[c("dA", "dB")], col.line=col, las=1, n.br=1000, xlab="Dispersal rate", legend="topright")  
+
+col <- c("green", "yellow")
+mcmc2$diversificationA <- mcmc2$sA - mcmc2$xA 
+mcmc2$diversificationB <- mcmc2$sB - mcmc2$xB
+profiles.plot(mcmc2[c("diversificationA", "diversificationB")], col.line=col, las=1, n.br=1000, xlab="Diversification rate", legend="topright")
+
+mean(mcmc2$dA > mcmc2$dB)
+mean(mcmc2$xA > mcmc2$xB)
+mean(mcmc2$sA > mcmc2$sB)
+mean(mcmc2$diversificationA > mcmc2$diversificationB)
+
+```

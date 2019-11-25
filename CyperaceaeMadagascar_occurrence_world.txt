@@ -1,4 +1,4 @@
-1382	8 (A B C D E F G H)
+	8 (A B C D E F G H)
 Actinoschoenus_thouarsii	10101100
 Actinoscirpus_grossus	00001100
 Amphiscirpus_nevadensis	00000011
@@ -1381,4 +1381,3 @@ Trilepis_lhotzkiana	00000001
 Xyroschoenus_hornei	10000000
 Zameioscirpus_atacamensis	00000001
 Zameioscirpus_muticus	00000001
-
