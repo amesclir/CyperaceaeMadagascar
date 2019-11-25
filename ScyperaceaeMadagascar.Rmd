@@ -1840,6 +1840,7 @@ setdiff(states,phy$tip.label)
 phy$tip.state <- names(states)[match(phy$tip.label,states)]
 names(phy$tip.state) <- states[match(phy$tip.label,states)] 
 
+
 p <- starting.point.geosse(phy)
 p
 
@@ -1848,8 +1849,14 @@ phy$tip.state[phy$tip.state == "B"] <- 2
 phy$tip.state[phy$tip.state == "AB"] <- 0
 phy$tip.state <- as.numeric(phy$tip.state)
 names(phy$tip.state) <- states[match(phy$tip.label,states)] 
+statecols <- c("AB"="purple", "A"="blue", "B"="red")
 
-lik1 <- make.geosse(phy, phy$tip.state, sampling.f = c(0.5,0.5,0.25))
+pdffn = paste0("geosse", ".phy.pdf")
+pdf(file=pdffn, width=6, height=60)
+plot(phy, tip.color=statecols[phy$tip.state+1], cex=0.5)
+dev.off()
+
+  lik1 <- make.geosse(phy, phy$tip.state, sampling.f = c(0.5,0.5,0.25))
 lik2 <- constrain(lik1, sAB ~ 0)
 lik3 <- constrain(lik1, sA ~ sB, xA ~ xB)
 
