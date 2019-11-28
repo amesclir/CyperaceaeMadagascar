@@ -1927,17 +1927,17 @@ library(BAMMtools)
 library(coda)
 
 ## load data
-mytree <- read.tree("tree.tree")
-mcmcout <- read.csv("mcmc_out.txt")
+mytree <- read.tree("./bamm/tree.tree")
+mcmcout <- read.csv("./bamm/mcmc_out.txt")
 
 ## create edata
-edata <- getEventData(mytree, eventdata = "event_data.txt", burnin=0.15)
+edata <- getEventData(mytree, eventdata = "./bamm/event_data.txt", burnin=0.25)
 
 
 #### Check convergence
 plot(mcmcout$logLik ~ mcmcout$generation)
 
-burnstart <- floor(0.15 * nrow(mcmcout))
+burnstart <- floor(0.25 * nrow(mcmcout))
 postburn <- mcmcout[burnstart:nrow(mcmcout), ]
 
 effectiveSize(postburn$N_shifts)
@@ -1951,7 +1951,7 @@ shift_probs
 
 
 ### Bayes factors
-bfmat <- computeBayesFactors(postburn, expectedNumberOfShifts=1, burnin=0.15)
+bfmat <- computeBayesFactors(postburn, expectedNumberOfShifts=1, burnin=0.25)
 bfmat
 
 #### PLOT CREDIBLE SHIFTS
@@ -1964,21 +1964,20 @@ plot.credibleshiftset(css,spex = "netdiv")
 par(mfrow=c(1,1))
 best <- getBestShiftConfiguration(edata, expectedNumberOfShifts=1)
 best
-plot.bammdata(best, lwd = 2,spex = "netdiv",label=T,cex=0.5)
+pdffn = paste0("bamm", ".best.pdf")
+pdf(file=pdffn, width=6, height=60)
+plot.bammdata(best, lwd = 2,spex = "netdiv",label=T,cex=0.3)
 axisPhylo()
-addBAMMshifts(best, cex=3)
+addBAMMshifts(best, cex=1)
+dev.off()
 best$eventData
 
 ### RATE through time
 plot.new()
-par(mfrow=c(1,3))
+par(mfrow=c(1,1))
 st <- max(branching.times(mytree))
-plotRateThroughTime(edata, intervalCol="red", avgCol="red", start.time=st, ylim=c(0,1), cex.axis=1,ratetype='netdiv')
-text(x=30, y= 0.8, label="All Scleria", font=4, cex=1.0, pos=4)
-plotRateThroughTime(edata, intervalCol="blue", avgCol="blue", start.time=st, node=222, ylim=c(0,1), cex.axis=1,ratetype='netdiv')
-text(x=30, y= 0.8, label="core Hypoporum", font=4, cex=1.0, pos=4)
-plotRateThroughTime(edata, intervalCol="darkgreen", avgCol="darkgreen", start.time=st, node=222, nodetype = "exclude", ylim=c(0,1), cex.axis=1,ratetype='netdiv')
-text(x=30, y= 0.8, label="Excluding core Hypoporum", font=4, cex=1.0, pos=4)
+plotRateThroughTime(edata, intervalCol="red", avgCol="red", start.time=st, ylim=c(0,0.6), cex.axis=1,ratetype='netdiv')
+text(x=30, y= 0.5, label="Cyperaceae", font=4, cex=1.0, pos=4)
 
 ```
 
