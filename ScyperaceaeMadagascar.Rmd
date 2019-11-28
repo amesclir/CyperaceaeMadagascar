@@ -1830,6 +1830,7 @@ check_ML_vs_BSM(res, clado_events_tables, model_name, tr=NULL, plot_each_node=FA
 library(diversitree)
 
 phy <- read.tree("./run1/tree.tree")
+phy <- drop.tip(phy, c("Juncus_capitatus","Juncus_acutus","Juncus_effusus","Juncus_trifidus"))
 mydata2 <- read.csv ("./run1/mydata.csv")
 states <- as.character(mydata2$Species)
 names(states) <- mydata2$Area
@@ -1919,3 +1920,65 @@ mean(mcmc2$sA > mcmc2$sB)
 mean(mcmc2$diversificationA > mcmc2$diversificationB)
 
 ```
+
+
+```{r}
+library(BAMMtools)
+library(coda)
+
+## load data
+mytree <- read.tree("tree.tree")
+mcmcout <- read.csv("mcmc_out.txt")
+
+## create edata
+edata <- getEventData(mytree, eventdata = "event_data.txt", burnin=0.15)
+
+
+#### Check convergence
+plot(mcmcout$logLik ~ mcmcout$generation)
+
+burnstart <- floor(0.15 * nrow(mcmcout))
+postburn <- mcmcout[burnstart:nrow(mcmcout), ]
+
+effectiveSize(postburn$N_shifts)
+effectiveSize(postburn$logLik)
+
+
+
+### Shift probabilities
+shift_probs <- summary(edata)
+shift_probs
+
+
+### Bayes factors
+bfmat <- computeBayesFactors(postburn, expectedNumberOfShifts=1, burnin=0.15)
+bfmat
+
+#### PLOT CREDIBLE SHIFTS
+css <- credibleShiftSet(edata, expectedNumberOfShifts=1, threshold=5, set.limit = 0.95)
+css
+plot.credibleshiftset(css,spex = "netdiv")
+
+
+### PLOT BEST SHIFT
+par(mfrow=c(1,1))
+best <- getBestShiftConfiguration(edata, expectedNumberOfShifts=1)
+best
+plot.bammdata(best, lwd = 2,spex = "netdiv",label=T,cex=0.5)
+axisPhylo()
+addBAMMshifts(best, cex=3)
+best$eventData
+
+### RATE through time
+plot.new()
+par(mfrow=c(1,3))
+st <- max(branching.times(mytree))
+plotRateThroughTime(edata, intervalCol="red", avgCol="red", start.time=st, ylim=c(0,1), cex.axis=1,ratetype='netdiv')
+text(x=30, y= 0.8, label="All Scleria", font=4, cex=1.0, pos=4)
+plotRateThroughTime(edata, intervalCol="blue", avgCol="blue", start.time=st, node=222, ylim=c(0,1), cex.axis=1,ratetype='netdiv')
+text(x=30, y= 0.8, label="core Hypoporum", font=4, cex=1.0, pos=4)
+plotRateThroughTime(edata, intervalCol="darkgreen", avgCol="darkgreen", start.time=st, node=222, nodetype = "exclude", ylim=c(0,1), cex.axis=1,ratetype='netdiv')
+text(x=30, y= 0.8, label="Excluding core Hypoporum", font=4, cex=1.0, pos=4)
+
+```
+
