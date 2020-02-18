@@ -3,6 +3,7 @@ library(adegenet)
 
 #cladogenic
 ### This will pull out each of the unique cladogenetic events at each node from each stochastic map
+load("BSM_DECX/BSM_output.RData")
 clado_events_table = clado_events_tables[[2]]
 clado_events_table = uniquify_clado_events(clado_events_table)
 head(clado_events_table)
@@ -23,7 +24,8 @@ for(i in 1:50){
   list_of_sympatry[[i]] <- as.data.frame(table(round(vicariance_clado_events_table[,c("time_bp")])))
   vicariance_clado_events_table = clado_events_table[clado_events_table$clado_event_type == "subset (s)", ]
   list_of_subset[[i]] <- as.data.frame(table(round(vicariance_clado_events_table[,c("time_bp")])))
-  }
+
+}
 
 vicariance <- rbindlist((list_of_vicariance))[,lapply(.SD,mean), list(as.numeric(as.vector(Var1)))]
 sympatry <- rbindlist((list_of_sympatry))[,lapply(.SD,mean), list(as.numeric(as.vector(Var1)))]
@@ -59,16 +61,16 @@ dispersal <- as.data.frame(dispersal[order(as.numeric),]) #anagenic
 
 # add in 0s for events not observed at particular dates - change the "100" to whatever your oldest node is
 names(sympatry) <- c("V1","V2")
-sympatry <- rbind(sympatry,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(sympatry$V1)==F)],0)))
+sympatry <- rbind(sympatry,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(sympatry$V1)==FALSE)],0)))
 sympatry <- sympatry[order(sympatry$V1),]
 names(vicariance) <- c("V1","V2")
-vicariance <- rbind(vicariance,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(vicariance$V1)==F)],0)))
+vicariance <- rbind(vicariance,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(vicariance$V1)==FALSE)],0)))
 vicariance <- vicariance[order(vicariance$V1),]
 names(subset) <- c("V1","V2")
-subset <- rbind(subset,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(subset$V1)==F)],0)))
+subset <- rbind(subset,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(subset$V1)==FALSE)],0)))
 subset <- subset[order(subset$V1),]
 names(dispersal) <- c("V1","V2")
-dispersal <- rbind(dispersal,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(dispersal$V1)==F)],0)))
+dispersal <- rbind(dispersal,as.data.frame(cbind(seq(from = 0, to = 100, by = 1)[which(seq(from = 0, to = 100, by = 1) %in% unique(dispersal$V1)==FALSE)],0)))
 dispersal <- dispersal[order(dispersal$V1),]
 
 #Calculate the total number of events at every age
@@ -122,7 +124,6 @@ par(new=T)
 lines(jitter(vicariance$V1,amount = 0.3), vicariance$weighted_freq, col = alpha("dark green", 0.4), lwd=3)
 par(new=T)
 lines(jitter(dispersal$V1,amount = 0.3), dispersal$weighted_freq, col = alpha("purple", 0.4), lwd = 3)
-par(new=T)
 #text(48,1, "Sympatry", col = "red", adj = c(0, -.1))
 #text(48,0.975, "Subset Sympatry", col = "blue", adj = c(0, -.1))
 #text(48,0.95, "Vicariance", col = "dark green", adj = c(0, -.1))
@@ -132,11 +133,11 @@ par(new=T)
 plot(events_per_time$V1, events_per_time$V2, pch = 16, axes=FALSE, xlab=NA, ylab=NA, cex=1.2)
 axis(side = 4)
 mtext(side = 4, line = 3, "Total number of events")
-legend("topright", legend = c("Sympatry","Subset Sympatry","Vicariance","Anagenic Dispersal", "Total # Events"), 
-       lty = c(1,1,1,1,0),
-       lwd = c(2,2,2,2,0),
-       col = c("red","blue","dark green","purple","black"),
-       pch = c(NA, NA, NA, NA, 16))
+legend("topright", legend = c("Within-area","Subset within-area","Vicariance","Anagenetic Dispersal", "Total # Events"), 
+       lty = c(1,1,1,1,1,0),
+       lwd = c(2,2,2,2,2,0),
+       col = c("red","blue","dark green","orange","purple","black"),
+       pch = c(NA, NA, NA, NA, NA, 16))
 dev.off()
 
 ##### Figure with timing of specific dispersal arrival events - i.e., how many times was each area the destination of a disperal at each year.
@@ -173,7 +174,10 @@ for(i in 1:50){
   list_of_G[[i]] <- as.data.frame(table(as.numeric(round(temp[,c("time_bp")]))))
   temp = ana_events_table[ana_events_table$dispersal_to == "H", ]
   list_of_H[[i]] <- as.data.frame(table(as.numeric(round(temp[,c("time_bp")]))))
-  }
+  temp = clado_events_table[clado_events_table$clado_dispersal_to == "A", ]
+  
+}
+
 A <- as.data.frame(rbindlist((list_of_A))[,lapply(.SD,mean), list(Var1)])
 A$Var1 <- as.numeric(as.vector(A$Var1))
 A <- A[order(A$Var1),]
@@ -322,6 +326,7 @@ legend("top", legend = c("Madagascar region","S Africa","Tropical Africa","N Afr
        col = c("red","orange","purple","dark blue","black", "green","yellow","cyan","black"),
        pch = c(NA, NA, NA, NA, NA, NA, NA, NA, 16))
 dev.off()
-  
+
+
   
   

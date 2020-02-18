@@ -1,4 +1,4 @@
-	8 (A B C D E F G H)
+1382	8 (A B C D E F G H)
 Actinoschoenus_thouarsii	10101100
 Actinoscirpus_grossus	00001100
 Amphiscirpus_nevadensis	00000011

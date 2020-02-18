@@ -1933,7 +1933,6 @@ mcmcout <- read.csv("./bamm/mcmc_out.txt")
 ## create edata
 edata <- getEventData(mytree, eventdata = "./bamm/event_data.txt", burnin=0.25)
 
-
 #### Check convergence
 plot(mcmcout$logLik ~ mcmcout$generation)
 
@@ -1978,6 +1977,30 @@ par(mfrow=c(1,1))
 st <- max(branching.times(mytree))
 plotRateThroughTime(edata, intervalCol="red", avgCol="red", start.time=st, ylim=c(0,0.6), cex.axis=1,ratetype='netdiv')
 text(x=30, y= 0.5, label="Cyperaceae", font=4, cex=1.0, pos=4)
+
+#other options
+sc <- distinctShiftConfigurations(edata, expectedNumberOfShifts = 1, threshold = 5)
+par(mfrow=c(1,1))
+pdffn = paste0("bamm", ".coreshiftconfiguration1198_bis.pdf")
+pdf(file=pdffn, width=8, height=18)
+plot(sc, edata, index = 1198)
+axisPhylo()
+dev.off()
+
+phylorates <- plot(edata, breaksmethod='jenks', show = FALSE)
+pdffn = paste0("bamm", ".histogram.pdf")
+pdf(file=pdffn, width=6, height=6)
+ratesHistogram(phylorates, plotBrks = FALSE, xlab = 'diversification rates')
+dev.off()
+
+
+msc_tree <- maximumShiftCredibility(edata)
+pdffn = paste0("bamm", ".maximumShiftCredibility2.pdf")
+pdf(file=pdffn, width=6, height=60)
+plot(edata)
+addBAMMshifts(edata, method='phylogram', index=msc_tree$sampleindex)
+axisPhylo()
+dev.off()
 
 ```
 
